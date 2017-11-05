@@ -31,13 +31,23 @@ var employees = [{
   "department": "Research and Development"
 }]
 
-// Create a function called 'employeeUpdater'. employeeUpdater will loop over the array above and perform the following:
+// Create a function called 'employeeUpdater' that takes no parameters. employeeUpdater will loop over the array above and perform the following:
 //  1. If employee's first name is Theo, remove that employee because he just got fired.
 //  2. If the employee's first name is Lorie, change her department to 'HR'.
 //  3. Return the updated employee array.
 
-// Code here
 
+function employeeUpdater() {
+  employees.forEach( (employee, index) => {
+    if (employee.firstName === 'Theo') {
+      employees.splice(index, 1);
+    } else if (employee.firstName === 'Lorie') {
+      employee.department = 'HR'
+    }
+  })
+
+  return employees;
+}
 
 
 
@@ -54,7 +64,15 @@ var employees = [{
 
 var workplaceAccidents = [12, 56, 44, 3, 29, 56, 56, 3, 7, 12];
 
-// Code here
+function removeDuplicates() {
+  let uniq = [];
+
+  workplaceAccidents.forEach( (num, index) => {
+    uniq.indexOf(num) === -1 ? uniq.push(num) : workplaceAccidents.splice(index, 1)
+  });
+
+  return workplaceAccidents;
+}
 
 
 
@@ -84,8 +102,8 @@ var cat = {
 
 // Code here
 
-var grumpyActivity;
-var fluffy2ndFriend;
+var grumpyActivity = cat.catFriends[0].activities[1];
+var fluffy2ndFriend = cat.catFriends[1].name;
 
 
 
@@ -122,7 +140,15 @@ var myCar = {
   ]
 }
 
-// Code here
+
+function recordCleaner() {
+  for (let i = 0; i < myCar.accidents.length; i++) {
+    if (myCar.accidents[i].atFaultForAccident) {
+      myCar.accidents[i].atFaultForAccident = false;
+    }
+  }
+}
+
 
 
 
@@ -143,6 +169,15 @@ var myCar = {
 
 var numsArr = [ [1, 2, 3, 4], [5, 6], [7, 8, 9, 10, 11]];
 
-
-
-
+function looper() {
+  for (let i = 0; i < numsArr.length; i++) {
+    for (let j = 0; j < numsArr[i].length; j++) {
+      if (numsArr[i][j] % 2 === 0) {
+        numsArr[i][j] = 'even';
+      } else {
+        numsArr[i][j] = 'odd';
+      }
+    }
+  }
+  return numsArr;
+}
