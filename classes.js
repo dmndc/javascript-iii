@@ -35,6 +35,7 @@ class Employee {
     }
 }
 
+    
 /*
 
 Next, make a manager for Widget Co.
@@ -53,7 +54,6 @@ call your class Manager
 */
 
 class Manager extends Employee {
-    
     constructor(first_name, last_name, email, age, reports) {
         super(first_name, last_name, email, age)
         this.reports = [];
@@ -66,7 +66,6 @@ class Manager extends Employee {
     fire(index) {
         this.reports.splice(index, 1);
     }
-
 }
 
 
@@ -92,6 +91,38 @@ Everytime they fire an employee they get $100 added to their bonus.
 call your class ProgressiveManager
 */
 
+class ProgressiveManager extends Manager {
+    constructor(first_name, last_name, email, age, reports, title, bonus) {
+        super(first_name, last_name, email, age, reports)
+        this.title = 'Not a manager';
+        this.bonus = 0;
+    }
+
+    hire(employee){
+        this.reports.push(employee);
+        var reports = this.reports.length;
+
+        if (reports === 0) {
+            this.title = 'Not a manager';
+        } else if (reports >= 1 && reports <= 3) {
+            this.title = 'Barely Manager';
+        } else if (reports >= 4 && reports <= 10) {
+            this.title = 'Mostly Manager';
+        } else if (reports >= 11 && reports <= 50) {
+            this.title = 'Manager';
+        } else if (reports > 51 && reports <= 100) {
+            this.title = 'Manager Plus';
+        } else if (reports >= 101) {
+            this.title = 'Bestest Manager';
+        }
+    }
+    
+    fire(employee){
+        this.reports.splice(employee, 1);
+        this.bonus += 100;
+    }
+
+}
 
 
 
@@ -117,3 +148,27 @@ It can :
       It should set decrease wear_and_tear_count by 10, and set needs_reboot to false
 
 */
+
+class Machine {
+    constructor() {
+        this.widgets_made_count = 0;
+        this.wear_and_tear_count = 0;
+        this.needs_reboot = false;
+    }
+
+    makeWidgets(number) {
+        this.widgets_made_count += number;
+        this.wear_and_tear_count += number / 50;
+    }
+
+    fixMachine() {
+        this.needs_reboot = true;
+    }
+
+    reboot() {
+        return () => {
+            this.wear_and_tear_count -= 10;
+            this.needs_reboot = false;
+        }
+    }
+}
